@@ -8,6 +8,7 @@ import phone.Phone;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class PhoneBookManager extends Phone implements IPhone, Serializable {
@@ -25,18 +26,20 @@ public class PhoneBookManager extends Phone implements IPhone, Serializable {
 
     @Override
     public void sort() {
-        for (Contact p : Menu.listContact) {
-            p.compareTo(p);
-        }
+        Collections.sort(Menu.listContact);
     }
 
     @Override
     public void display(Type type) {
-        for (Contact p : Menu.listContact) {
-            if (p.getType().equals(type)){
-                System.out.println(p);
-            } else if (p.getType().equals(null)) {
-                System.out.println(p);
+        if (Objects.isNull(type)) {
+            for (Contact p : Menu.listContact) {
+                    System.out.println(p);
+            }
+        } else {
+            for (Contact p : Menu.listContact) {
+                if (type.getTypeName().equals(p.getType().getTypeName())) {
+                    System.out.println(p);
+                }
             }
         }
     }
@@ -74,16 +77,12 @@ public class PhoneBookManager extends Phone implements IPhone, Serializable {
                 case 2:
                     System.out.println("Mời bạn lựa chọn type ");
                     for (Type p : Menu.listType) {
-                        System.out.println(p.getId() + "." + p.getName());
+                        System.out.println(p.getId() + "." + p.getTypeName());
                     }
                     choice1 = Integer.parseInt(scanner.nextLine());
-                    for (Contact p : Menu.listContact) {
-                        if (contact.getName().equals(p.getName())) {
-                            for (Type x : Menu.listType) {
-                                if (choice1 == x.getId()) {
-                                    p.setType(x);
-                                }
-                            }
+                    for (Type x : Menu.listType) {
+                        if (x.getId() == choice1) {
+                            Menu.listContact.add(new Contact(contact.name, contact.phoneNumber,x));
                         }
                     }
             }

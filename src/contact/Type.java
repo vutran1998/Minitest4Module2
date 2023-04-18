@@ -23,7 +23,7 @@ public class Type implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public String getTypeName() {
         return name;
     }
 

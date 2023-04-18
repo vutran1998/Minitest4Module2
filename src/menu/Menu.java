@@ -20,21 +20,21 @@ public class Menu implements Serializable {
 
     public static void addType() {
         listType = readFile.inputStream("C:\\module2\\Minitest4\\src\\file\\Type");
-        listType.add(new Type(1, "friend"));
-        listType.add(new Type(2, "family"));
-        listType.add(new Type(3, "work"));
+//        listType.add(new Type(1, "friend"));
+//        listType.add(new Type(2, "family"));
+//        listType.add(new Type(3, "work"));
     }
 
     public static void addContact() {
         listContact = readFile.inputStream("C:\\module2\\Minitest4\\src\\file\\Contact");
-        listContact.add(new Contact("tienanh", "12345", listType.get(0)));
-        listContact.add(new Contact("thuyhang", "56789", listType.get(1)));
-        listContact.add(new Contact("dongnam", "99999", listType.get(2)));
-        listContact.add(new Contact("son", "11335", listType.get(0)));
-        listContact.add(new Contact("ha", "55779", listType.get(1)));
-        listContact.add(new Contact("quan", "88888", listType.get(2)));
-        listContact.add(new Contact("son", "10101"));
-        listContact.add(new Contact("dung", "13579"));
+//        listContact.add(new Contact("tienanh", "12345", listType.get(0)));
+//        listContact.add(new Contact("thuyhang", "56789", listType.get(1)));
+//        listContact.add(new Contact("dongnam", "99999", listType.get(2)));
+//        listContact.add(new Contact("son", "11335", listType.get(0)));
+//        listContact.add(new Contact("ha", "55779", listType.get(1)));
+//        listContact.add(new Contact("quan", "88888", listType.get(2)));
+//        listContact.add(new Contact("son", "10101",null));
+//        listContact.add(new Contact("dung", "13579",null));
     }
 
     public static void main(String[] args) {
@@ -58,7 +58,7 @@ public class Menu implements Serializable {
                 case 1:
                     int choiceC;
                     for (Type p : Menu.listType) {
-                        System.out.println(p.getId() + "." + p.getName());
+                        System.out.println(p.getId() + "." + p.getTypeName());
                     }
                     System.out.println("Mời bạn nhập lựa chọn");
                     System.out.println("Ấn số 999 để hiện thị tất cả danh sách không thuộc loại nào ");
@@ -78,19 +78,17 @@ public class Menu implements Serializable {
                         for (Contact p : Menu.listContact) {
                             if (p.getName().toLowerCase().equals(name.toLowerCase())) {
                                 check = false;
-                            } else {
-                                System.out.println("Mời bạn nhập lại");
                             }
                         }
                     }
                     phoneBookManager.searchPhone(name);
                     break;
                 case 3:
-                    System.out.println("Mời bạn nhập tên tài khoản");
+                    System.out.println("Mời bạn nhập tên trong danh bạ");
                     String name1 = scanner.nextLine();
                     System.out.println("Nhập số điện thoại");
                     String phone = scanner.nextLine();
-                    Contact contact1 = new Contact(name1, phone, null);
+                    Contact contact1 = new Contact(name1, phone);
                     phoneBookManager.insertPhone(contact1);
                     writeFile.outPutStream("C:\\module2\\Minitest4\\src\\file\\Type", listType);
                     writeFile.outPutStream("C:\\module2\\Minitest4\\src\\file\\Contact", listContact);
@@ -121,6 +119,9 @@ public class Menu implements Serializable {
                     break;
                 case 6:
                     phoneBookManager.sort();
+                    for (Contact p:Menu.listContact) {
+                        System.out.println(p);
+                    }
                     writeFile.outPutStream("C:\\module2\\Minitest4\\src\\file\\Type", listType);
                     writeFile.outPutStream("C:\\module2\\Minitest4\\src\\file\\Contact", listContact);
                     break;
